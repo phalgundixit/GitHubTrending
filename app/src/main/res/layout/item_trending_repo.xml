@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerTrendingRepo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivUserAvatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/content_desc_avatar"
+            android:src="@drawable/drawable_round_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.phalgundixit.githubtrending.widget.CustomTextView
+            android:id="@+id/tvUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/colorSecondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivUserAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textFont="regular"
+            tools:text="Username" />
+
+        <com.phalgundixit.githubtrending.widget.CustomTextView
+            android:id="@+id/tvRepoName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/colorGrey800"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tvUsername"
+            app:layout_constraintTop_toBottomOf="@id/tvUsername"
+            app:textFont="regular"
+            tools:text="Repo Name" />
+
+        <com.phalgundixit.githubtrending.widget.CustomTextView
+            android:id="@+id/tvRepoDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/colorGrey800"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvUsername"
+            app:layout_constraintTop_toBottomOf="@id/tvUsername"
+            app:textFont="regular"
+            tools:text="Repo Desc" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDot"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            app:layout_constraintStart_toEndOf="@id/ivUserAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvRepoDesc"
+            app:srcCompat="@drawable/drawable_cricle_lang" />
+
+        <com.phalgundixit.githubtrending.widget.CustomTextView
+            android:id="@+id/tvRepoLang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:lines="1"
+            android:textColor="@color/colorGrey800"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDot"
+            app:layout_constraintStart_toEndOf="@id/ivDot"
+            app:layout_constraintTop_toTopOf="@+id/ivDot"
+            app:textFont="regular"
+            tools:text="Android" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tvUsername"
+            app:layout_constraintTop_toBottomOf="@id/tvRepoLang">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                app:srcCompat="@drawable/ic_repo_starts" />
+
+            <com.phalgundixit.githubtrending.widget.CustomTextView
+                android:id="@+id/tvRepoStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:lines="1"
+                android:textColor="@color/colorGrey800"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/ivUserAvatar"
+                app:layout_constraintTop_toBottomOf="@id/tvRepoLang"
+                app:textFont="regular"
+                tools:text="10000" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="15dp"
+                app:srcCompat="@drawable/ic_repo_fork" />
+
+            <com.phalgundixit.githubtrending.widget.CustomTextView
+                android:id="@+id/tvRepoFork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:lines="1"
+                android:textColor="@color/colorGrey800"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/tvRepoStars"
+                app:layout_constraintTop_toBottomOf="@id/tvRepoLang"
+                app:textFont="regular"
+                tools:text="100" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupExpansion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="tvRepoDesc,tvRepoStars,tvRepoFork,tvRepoLang" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
