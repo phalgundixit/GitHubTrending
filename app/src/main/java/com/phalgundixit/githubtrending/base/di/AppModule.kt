@@ -1,19 +1,21 @@
 package com.phalgundixit.githubtrending.base.di
 
-import com.phalgundixit.githubtrending.base.api.GithubApi
-import com.phalgundixit.githubtrending.base.api.HeaderInterceptor
-import com.phalgundixit.githubtrending.base.api.HttpClient
-import com.phalgundixit.githubtrending.base.api.LoggingInterceptor
+import android.content.Context
+import com.phalgundixit.githubtrending.base.api.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
+
+private const val CACHE_SIZE = 5 * 1024 * 1024L // 5 MB
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -25,9 +27,18 @@ object AppModule {
     @Provides
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        headerInterceptor: HeaderInterceptor
+        headerInterceptor: HeaderInterceptor,
+        cacheInterceptor: CacheInterceptor,
+        offlineCacheInterceptor: OfflineCacheInterceptor,
+        cache: Cache
     ): OkHttpClient {
-        return HttpClient.setupOkhttpClient(httpLoggingInterceptor, headerInterceptor)
+        return HttpClient.setupOkhttpClient(
+            httpLoggingInterceptor,
+            headerInterceptor,
+            cacheInterceptor,
+            offlineCacheInterceptor,
+            cache
+        )
     }
 
     @Singleton
@@ -51,5 +62,15 @@ object AppModule {
 
     @Provides
     @Named("authToken")
-    fun provideAuthToken(): String = "Add Your Token Here"
+    fun provideAuthToken(): String = "Add Your Key Here"
+
+    @Provides
+    fun provideCachingInterceptor(): CacheInterceptor = CacheInterceptor()
+
+    @Provides
+    fun provideHttpCache(@ApplicationContext context: Context
+    ): Cache {
+        return Cache(context.cacheDir, CACHE_SIZE)
+    }
+
 }

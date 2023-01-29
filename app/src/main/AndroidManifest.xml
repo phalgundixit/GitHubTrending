@@ -26,6 +26,11 @@
             android:label="@string/title_activity_repo_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.WebViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_repo_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.RepoDetailsActivity"
             android:exported="false"
             android:label="@string/title_activity_repo_details"

@@ -48,6 +48,8 @@ android {
 dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.test:monitor:1.5.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
     def appDependencies = rootProject.ext.appDependencies
 
     //Local libs
@@ -90,5 +92,9 @@ dependencies {
     implementation appDependencies.hiltAndroid
     kapt appDependencies.androidxHiltCompiler
     implementation appDependencies.hiltLifecycle
+
+
+    //swipe up refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 }

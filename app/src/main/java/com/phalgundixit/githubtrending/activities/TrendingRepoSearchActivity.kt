@@ -37,14 +37,21 @@ class TrendingRepoSearchActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         viewModel = ViewModelProvider(this)[ReposViewModel::class.java]
-
-        displayLoadingState()
-
         reposAdapter = ReposAdapter{
             val intent = Intent(this@TrendingRepoSearchActivity,RepoDetailsActivity::class.java)
             intent.putExtra(DETAILS_DATA,it)
             startActivity(intent)
         }
+        initData()
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            initData()
+        }
+
+
+    }
+    private fun initData(){
+        displayLoadingState()
         binding.apply {
             binding.rvRepository.apply {
                 setHasFixedSize(true)
@@ -94,7 +101,6 @@ class TrendingRepoSearchActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
