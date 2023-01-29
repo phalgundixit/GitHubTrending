@@ -2,7 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvTrendingCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:cardUseCompatPadding="true"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/colorGreen800"
+        >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerTrendingRepo"
         android:layout_width="match_parent"
@@ -145,5 +153,6 @@
             app:constraint_referenced_ids="tvRepoDesc,tvRepoStars,tvRepoFork,tvRepoLang" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

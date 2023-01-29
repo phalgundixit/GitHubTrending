@@ -1,8 +1,10 @@
 package com.phalgundixit.githubtrending.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +40,11 @@ class TrendingRepoSearchActivity : AppCompatActivity() {
 
         displayLoadingState()
 
-        reposAdapter = ReposAdapter()
+        reposAdapter = ReposAdapter{
+            val intent = Intent(this@TrendingRepoSearchActivity,RepoDetailsActivity::class.java)
+            intent.putExtra(DETAILS_DATA,it)
+            startActivity(intent)
+        }
         binding.apply {
             binding.rvRepository.apply {
                 setHasFixedSize(true)
@@ -153,5 +159,8 @@ class TrendingRepoSearchActivity : AppCompatActivity() {
         binding.rvRepository.show()
         binding.loadingLayout.containerShimmer.hide()
         binding.loadingLayout.containerShimmer.stopShimmer()
+    }
+    companion object{
+         const val DETAILS_DATA = "DETAILS_DATA"
     }
 }

@@ -1,6 +1,7 @@
 package com.phalgundixit.githubtrending.base.di
 
 import com.phalgundixit.githubtrending.base.api.GithubApi
+import com.phalgundixit.githubtrending.base.api.HeaderInterceptor
 import com.phalgundixit.githubtrending.base.api.HttpClient
 import com.phalgundixit.githubtrending.base.api.LoggingInterceptor
 import dagger.Module
@@ -22,8 +23,11 @@ object AppModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor = LoggingInterceptor.create()
 
     @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return HttpClient.setupOkhttpClient(httpLoggingInterceptor)
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        headerInterceptor: HeaderInterceptor
+    ): OkHttpClient {
+        return HttpClient.setupOkhttpClient(httpLoggingInterceptor, headerInterceptor)
     }
 
     @Singleton
@@ -44,4 +48,8 @@ object AppModule {
     @Provides
     @Named("baseUrl")
     fun provideBaseUrl(): String = "https://api.github.com/"
+
+    @Provides
+    @Named("authToken")
+    fun provideAuthToken(): String = "Add Your Token Here"
 }

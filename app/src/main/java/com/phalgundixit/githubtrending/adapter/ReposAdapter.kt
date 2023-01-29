@@ -17,7 +17,7 @@ import com.phalgundixit.githubtrending.data.model.Repo
 import com.phalgundixit.githubtrending.databinding.ItemTrendingRepoBinding
 
 
-class ReposAdapter : PagingDataAdapter<Repo, ReposAdapter.ViewHolder>(REPO_COMPARATOR) {
+class ReposAdapter(val trendingItemOnClick : (Repo) -> Unit) : PagingDataAdapter<Repo, ReposAdapter.ViewHolder>(REPO_COMPARATOR) {
 
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Repo>() {
@@ -45,8 +45,7 @@ class ReposAdapter : PagingDataAdapter<Repo, ReposAdapter.ViewHolder>(REPO_COMPA
 
     private fun createOnClickListener(binding: ItemTrendingRepoBinding, repo: Repo, position: Int): View.OnClickListener {
         return View.OnClickListener {
-            snapshot()[position]?.isSelectedItem?.let { snapshot()[position]?.isSelectedItem = !it }
-            notifyItemChanged(position)
+            snapshot()[position]?.let { it1 -> trendingItemOnClick(it1) }
         }
     }
 
